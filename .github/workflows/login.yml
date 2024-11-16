@@ -1,1 +1,30 @@
+name: Validate HTML
+
+# This workflow runs on push to the "main" branch or on pull request
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when code is pushed to the "main" branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow on pull requests to the "main" branch
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest  # The virtual environment (a fresh Ubuntu machine)
+
+    steps:
+      # Step 1: Checkout the code from the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Install the HTML validator tool (htmlhint)
+      - name: Install HTMLHint
+        run: npm install -g htmlhint
+
+      # Step 3: Run the HTML validation on login.html
+      - name: Validate login.html
+        run: htmlhint login.html  # This runs the validator on the "login.html" file
+
+      # Optionally, you could set up additional steps for other files or actions
 
